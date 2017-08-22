@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <!-- Convert an xacro and put on parameter server -->
+  <param name="robot_description" command="$(find xacro)/xacro.py $(find widowx_arm_description)/robots/widowx_arm.urdf.xacro" />
+  <!-- Spawn a robot into Gazebo -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -x 0 -y 0 -z 0 -R 0 -P 1.57 -Y 0 -model widowx" />
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find widowx_arm_gazebo)/worlds/empty.world"/>
+    <!-- more default parameters can be changed here -->
+  </include>
+</launch>
